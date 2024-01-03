@@ -1,8 +1,10 @@
-import { Position } from 'reactflow';
+import { Position, useNodeId } from 'reactflow';
 import { HandleType, SelectOption } from '../types';
 import CustomNode from './CustomNode';
 import InputBox from './Inputbox';
 import SelectDropdown from './SelectDropdown';
+import { useAppSelector } from '../redux/hooks';
+import useNodeColsCount from '../hooks/useNodeColsCount';
 
 const columnNames: SelectOption[] = [
   {
@@ -35,6 +37,13 @@ const conditions: SelectOption[] = [
 ];
 
 const FilterNode = () => {
+  const { nodeOutputs } = useAppSelector((store) => store.workflow);
+
+  const nodeId = useNodeId();
+
+  // node cols count hook
+  const { nodeColsCount } = useNodeColsCount(nodeId || '');
+
   const handles: HandleType[] = [
     { type: 'target', position: Position.Left, id: 'left' },
     { type: 'source', position: Position.Right, id: 'right' },
@@ -45,7 +54,7 @@ const FilterNode = () => {
       title="Filter"
       // onClose={() => {}}
       handleRun={() => {}}
-      datasetInfo="[DATASET] 41764 rows | 10 columns"
+      datasetInfo={nodeColsCount > 0 ? `[DATASET] ${nodeColsCount} rows` : ''}
       handles={handles}
     >
       <SelectDropdown label="Column name" options={columnNames} />

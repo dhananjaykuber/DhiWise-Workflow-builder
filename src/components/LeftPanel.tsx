@@ -12,7 +12,7 @@ const LeftPanel = () => {
         Blocks
       </div>
       <Button
-        className="flex gap-2 bg-transparent border border-navy-100 rounded-full"
+        className="flex gap-2 bg-transparent border border-navy-100 rounded-full hover:bg-navy-500 w-fit px-5"
         onClick={() => dispatch(onOpen())}
       >
         <Plus className="w-4 h-4" /> Add Block

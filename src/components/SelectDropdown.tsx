@@ -14,6 +14,8 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
   defaultSelectText,
   className,
   options,
+  value,
+  onChange,
 }) => {
   return (
     <div className="flex flex-col gap-1 mb-3">
@@ -22,13 +24,14 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
         className={twMerge(
           `text-sm outline-none bg-navy-600 border border-navy-400 text-white p-1 rounded-md px-2 min-w-[230px] ${className}`
         )}
+        onChange={onChange}
       >
         <option selected disabled className="text-xs lowercase">
           {defaultSelectText ? defaultSelectText : label}
         </option>
         {options?.map((option) => (
           <option
-            value={option?.value ? option.value : option.text}
+            value={option.value || option.text}
             className="text-xs"
             key={option.text}
           >

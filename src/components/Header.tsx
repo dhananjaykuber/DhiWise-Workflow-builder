@@ -10,7 +10,7 @@ const Header = () => {
         Workflow Builder
       </a>
 
-      <Button className="hover:text-gray-100 w-fit rounded-sm">
+      <Button className="hover:text-gray-100 hover:bg-navy-400 w-fit rounded-sm">
         Save workflow
       </Button>
     </header>

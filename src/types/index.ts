@@ -10,3 +10,15 @@ export interface HandleType {
   position: Position;
   id: string;
 }
+
+export interface NodeOutput {
+  [id: string]: {
+    id: string;
+    output: [];
+  };
+}
+
+export interface TableColumn {
+  Header: string;
+  accessor: string;
+}

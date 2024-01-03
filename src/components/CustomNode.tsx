@@ -4,41 +4,56 @@ import Button from './Button';
 import { Handle } from 'reactflow';
 import { HandleType } from '../types';
 import { useNodeId } from 'reactflow';
-import { useAppDispatch } from '../redux/hooks';
-import { removeNode } from '../redux/slices/workflow';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { removeNode, setCurrentSelected } from '../redux/slices/workflow';
+import { twMerge } from 'tailwind-merge';
 
 interface CustomNodeProps {
   title: string;
-  // onClose: () => void;
   children: ReactNode;
   handleRun?: () => void;
-  datasetInfo?: string;
+  datasetInfo?: string | '';
   handles?: HandleType[];
 }
 
 const CustomNode: FC<CustomNodeProps> = ({
   title,
-  // onClose,
   children,
   handleRun,
-  datasetInfo,
+  datasetInfo = '',
   handles,
 }) => {
   const dispatch = useAppDispatch();
+  const { currentSelected } = useAppSelector((store) => store.workflow);
 
   // inbuilt hook to get id of node
   const nodeId = useNodeId();
 
-  const handleRemoveNode = () => {
+  const handleRemoveNode = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // TODO: need to remove all the edges associated with this node
+    e.stopPropagation();
     if (nodeId) {
       dispatch(removeNode(nodeId.toString()));
     }
   };
 
+  const handleSelect = () => {
+    if (nodeId) {
+      dispatch(setCurrentSelected(nodeId.toString()));
+    }
+  };
+
   return (
-    <div>
+    <div onClick={handleSelect}>
       <div className="flex">
-        <div className="bg-navy-600 border border-navy-500">
+        <div
+          className={twMerge(
+            `bg-navy-600 border border-navy-500 ${
+              currentSelected === nodeId &&
+              'border-l-navy-200 border-t-navy-200 border-b-navy-200'
+            }`
+          )}
+        >
           <div className="flex items-center justify-between border-b border-navy-500 p-2 gap-20">
             <div className="text-white flex items-center tracking-wider gap-1">
               <GripVertical className="w-4 h-4" />

@@ -1,14 +1,19 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Edge, Node } from 'reactflow';
+import { NodeOutput } from '../../../types';
 
 interface WorkflowInitialState {
   nodes: Node[];
   edges: Edge[];
+  currentSelected: string | null;
+  nodeOutputs: NodeOutput;
 }
 
 const initialState: WorkflowInitialState = {
   nodes: [],
   edges: [],
+  currentSelected: null,
+  nodeOutputs: {},
 };
 
 export const workflowSlice = createSlice({
@@ -20,6 +25,13 @@ export const workflowSlice = createSlice({
     },
     addNode: (state, action: PayloadAction<Node>) => {
       state.nodes.push(action.payload);
+
+      const { id } = action.payload;
+
+      state.nodeOutputs = {
+        ...state.nodeOutputs,
+        [id]: { id, output: [] },
+      };
     },
     removeNode: (state, action: PayloadAction<string>) => {
       const nodeIdToDelete = action.payload;
@@ -38,10 +50,31 @@ export const workflowSlice = createSlice({
     addEdge: (state, action: PayloadAction<Edge>) => {
       state.edges.push(action.payload);
     },
+    setCurrentSelected: (state, action: PayloadAction<string | null>) => {
+      state.currentSelected = action.payload;
+    },
+    setNodeOutput: (
+      state,
+      action: PayloadAction<{ id: string; data: any }>
+    ) => {
+      const { id, data } = action.payload;
+
+      state.nodeOutputs = {
+        ...state.nodeOutputs,
+        [id]: { id, output: data },
+      };
+    },
   },
 });
 
-export const { setNodes, addNode, removeNode, setEdges, addEdge } =
-  workflowSlice.actions;
+export const {
+  setNodes,
+  addNode,
+  removeNode,
+  setEdges,
+  addEdge,
+  setCurrentSelected,
+  setNodeOutput,
+} = workflowSlice.actions;
 
 export default workflowSlice.reducer;

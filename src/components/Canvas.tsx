@@ -69,7 +69,7 @@ export default function App() {
   );
 
   return (
-    <div className="w-full h-full pb-11">
+    <div className="w-full h-full">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -81,7 +81,7 @@ export default function App() {
         nodeTypes={nodeTypes}
       >
         <Background />
-        <Controls />
+        <Controls color="rgb(34, 33, 56)" />
         <MiniMap
           pannable
           zoomable

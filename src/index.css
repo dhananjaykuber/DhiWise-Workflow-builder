@@ -12,6 +12,15 @@
   background: #333154;
 }
 
+.react-flow__controls-button {
+  background: #222138 !important;
+  border-bottom: 0.5px solid #403f69 !important;
+}
+
+.react-flow__controls-button svg {
+  fill: white !important;
+}
+
 ::-webkit-scrollbar {
   width: 0px;
 }

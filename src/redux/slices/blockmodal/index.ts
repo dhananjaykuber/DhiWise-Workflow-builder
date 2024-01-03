@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface BlockModalInitialState {
   isOpen: boolean;
@@ -10,7 +10,7 @@ const initialState: BlockModalInitialState = {
 
 export const blockModalSlice = createSlice({
   name: 'blockModa',
-  initialState: initialState,
+  initialState,
   reducers: {
     onOpen: (state) => {
       state.isOpen = true;
