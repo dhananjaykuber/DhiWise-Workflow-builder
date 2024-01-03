@@ -8,7 +8,8 @@ const blocksLibrary = [
     title: 'Input',
     blocks: [
       {
-        type: 'File',
+        title: 'File',
+        type: 'fileNode',
         desc: 'Handles csv, json or geojson files.',
         input: '',
         output: 'Dataset, Geojson',
@@ -19,13 +20,15 @@ const blocksLibrary = [
     title: 'Transforms',
     blocks: [
       {
-        type: 'Filter',
+        title: 'Filter',
+        type: 'filterNode',
         desc: 'Group a dataset based on a given column name.',
         input: '',
         output: 'Dataset',
       },
       {
-        type: 'Sort',
+        title: 'Sort',
+        type: 'sortNode',
         desc: 'Sort data based on a given column.',
         input: 'Dataset ',
         output: 'Dataset',

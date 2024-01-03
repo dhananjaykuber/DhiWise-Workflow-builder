@@ -10,7 +10,7 @@ export default function App() {
         <LeftPanel />
         <Canvas />
       </div>
-      <OutputPanel />
+      {/* <OutputPanel /> */}
     </Layout>
   );
 }

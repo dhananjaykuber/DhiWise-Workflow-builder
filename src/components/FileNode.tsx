@@ -1,4 +1,5 @@
-import { SelectOption } from '../types';
+import { Position } from 'reactflow';
+import { HandleType, SelectOption } from '../types';
 import CustomNode from './CustomNode';
 import SelectDropdown from './SelectDropdown';
 
@@ -22,8 +23,16 @@ const options: SelectOption[] = [
 ];
 
 const FileNode = () => {
+  const handles: HandleType[] = [
+    { type: 'source', position: Position.Right, id: 'right' },
+  ];
+
   return (
-    <CustomNode title="File" onClose={() => {}}>
+    <CustomNode
+      title="File"
+      // onClose={() => {}}
+      handles={handles}
+    >
       <p className="text-gray-400 text-sm mb-2">Allowed types: csv, json</p>
       <SelectDropdown label="File name" options={options} />
     </CustomNode>

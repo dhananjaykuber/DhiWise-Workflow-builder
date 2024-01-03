@@ -1,40 +1,29 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import ReactFlow, {
-  addEdge,
   applyNodeChanges,
   applyEdgeChanges,
-  Node,
   Edge,
-  NodeChange,
-  EdgeChange,
-  Connection,
-  NodeTypes,
   DefaultEdgeOptions,
   OnNodesChange,
   OnEdgesChange,
   OnConnect,
   Background,
   Controls,
+  MiniMap,
 } from 'reactflow';
+
 import FileNode from './FileNode';
 import SortNode from './SortNode';
+import FilterNode from './FilterNode';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { addEdge, setNodes, setEdges } from '../redux/slices/workflow';
 
-// Nodes & Edges
-const initialNodes: Node[] = [
-  {
-    id: '1',
-    type: 'fileNode',
-    data: { label: 'Node 1' },
-    position: { x: 5, y: 5 },
-  },
-  {
-    id: '2',
-    type: 'sortNode',
-    data: { label: 'Node 2' },
-    position: { x: 5, y: 100 },
-  },
-];
-const initialEdges: Edge[] = [{ id: 'e1-2', source: '1', target: '2' }];
+// custom nodes
+const nodeTypes = {
+  fileNode: FileNode,
+  sortNode: SortNode,
+  filterNode: FilterNode,
+};
 
 // edge options
 const defaultEdgeOptions: DefaultEdgeOptions = {
@@ -43,28 +32,40 @@ const defaultEdgeOptions: DefaultEdgeOptions = {
 
 // App
 export default function App() {
-  const [nodes, setNodes] = useState<Node[]>(initialNodes);
-  const [edges, setEdges] = useState<Edge[]>(initialEdges);
+  const dispatch = useAppDispatch();
 
-  // custom nodes
-  const nodeTypes = useMemo(
-    () => ({ fileNode: FileNode, sortNode: SortNode }),
-    []
-  );
+  const { nodes, edges } = useAppSelector((store) => store.workflow);
 
   const onNodesChange: OnNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    [setNodes]
+    (changes) => {
+      const updatedNodes = applyNodeChanges(changes, nodes);
+      dispatch(setNodes(updatedNodes));
+    },
+    [dispatch, nodes]
   );
 
   const onEdgesChange: OnEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    [setEdges]
+    (changes) => {
+      const updatedEdges = applyEdgeChanges(changes, edges);
+      dispatch(setEdges(updatedEdges));
+    },
+    [dispatch, edges]
   );
 
   const onConnect: OnConnect = useCallback(
-    (connection) => setEdges((eds) => addEdge(connection, eds)),
-    [setEdges]
+    (connection) => {
+      // create new edge and add
+      const newEdge: Edge = {
+        id: `edge-${connection.source}-${connection.target}`,
+        source: connection.source || '0',
+        target: connection.target || '0',
+        sourceHandle: connection.sourceHandle,
+        targetHandle: connection.targetHandle,
+      };
+
+      dispatch(addEdge(newEdge));
+    },
+    [dispatch]
   );
 
   return (
@@ -81,6 +82,13 @@ export default function App() {
       >
         <Background />
         <Controls />
+        <MiniMap
+          pannable
+          zoomable
+          maskColor="rgb(34, 33, 56)"
+          nodeColor="rgb(34, 33, 56)"
+          className="bg-navy-100"
+        />
       </ReactFlow>
     </div>
   );

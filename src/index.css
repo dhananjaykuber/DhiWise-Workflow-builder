@@ -8,6 +8,10 @@
   font-family: 'IBM Plex Sans', sans-serif;
 }
 
+.react-flow__minimap svg {
+  background: #333154;
+}
+
 ::-webkit-scrollbar {
   width: 0px;
 }

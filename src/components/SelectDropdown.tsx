@@ -30,6 +30,7 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
           <option
             value={option?.value ? option.value : option.text}
             className="text-xs"
+            key={option.text}
           >
             {option.text}
           </option>

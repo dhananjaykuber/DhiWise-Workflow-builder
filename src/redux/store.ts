@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import blockModalSlice from './slices/blockmodal';
+import workflowSlice from './slices/workflow';
 
 export const store = configureStore({
   reducer: {
     blockModal: blockModalSlice,
+    workflow: workflowSlice,
   },
 });
 

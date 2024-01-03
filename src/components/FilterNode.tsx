@@ -1,6 +1,7 @@
 import { Position } from 'reactflow';
 import { HandleType, SelectOption } from '../types';
 import CustomNode from './CustomNode';
+import InputBox from './Inputbox';
 import SelectDropdown from './SelectDropdown';
 
 const columnNames: SelectOption[] = [
@@ -18,16 +19,22 @@ const columnNames: SelectOption[] = [
   },
 ];
 
-const orders: SelectOption[] = [
+const conditions: SelectOption[] = [
   {
-    text: 'Ascending',
+    text: 'text is exactly',
   },
   {
-    text: 'Descending',
+    text: 'text is not exactly',
+  },
+  {
+    text: 'text includes',
+  },
+  {
+    text: 'text does not includes',
   },
 ];
 
-const SortNode = () => {
+const FilterNode = () => {
   const handles: HandleType[] = [
     { type: 'target', position: Position.Left, id: 'left' },
     { type: 'source', position: Position.Right, id: 'right' },
@@ -35,16 +42,17 @@ const SortNode = () => {
 
   return (
     <CustomNode
-      title="Sort"
+      title="Filter"
       // onClose={() => {}}
       handleRun={() => {}}
       datasetInfo="[DATASET] 41764 rows | 10 columns"
       handles={handles}
     >
       <SelectDropdown label="Column name" options={columnNames} />
-      <SelectDropdown label="Order" options={orders} />
+      <SelectDropdown label="Condition" options={conditions} />
+      <InputBox />
     </CustomNode>
   );
 };
 
-export default SortNode;
+export default FilterNode;
