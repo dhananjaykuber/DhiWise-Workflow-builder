@@ -1,3 +1,5 @@
+// return column names of the data
+
 import { useAppSelector } from '../redux/hooks';
 
 const useGetColumns = () => {
@@ -6,7 +8,7 @@ const useGetColumns = () => {
   const getColumns = (id: string) => {
     let cols: { key: string; type: any }[] = [];
 
-    if (id && nodeOutputs[id].output.length > 0) {
+    if (id && nodeOutputs[id]?.output?.length > 0) {
       const firstRow = nodeOutputs[id].output.at(0);
 
       if (firstRow) {

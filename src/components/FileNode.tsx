@@ -7,25 +7,24 @@ import { useState } from 'react';
 import useCSVData from '../hooks/useCSVData';
 import toast from 'react-hot-toast';
 import { setNodeOutput } from '../redux/slices/workflow';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useAppDispatch } from '../redux/hooks';
 import useNodeColsCount from '../hooks/useNodeColsCount';
 
 const options: SelectOption[] = CSVData;
 
+const handles: HandleType[] = [
+  { type: 'source', position: Position.Right, id: 'right' },
+];
+
 const FileNode = () => {
   const dispatch = useAppDispatch();
-  const { nodeOutputs } = useAppSelector((store) => store.workflow);
 
   const nodeId = useNodeId();
 
   const [path, setPath] = useState<string>('');
 
-  const handles: HandleType[] = [
-    { type: 'source', position: Position.Right, id: 'right' },
-  ];
-
   // node cols count hook
-  const { nodeColsCount } = useNodeColsCount(nodeId || '');
+  const { nodeColsCount, getNodeColsCount } = useNodeColsCount(nodeId || '');
 
   // read csv hook
   const { readCSVData } = useCSVData();
@@ -39,8 +38,12 @@ const FileNode = () => {
       try {
         const data = await readCSVData(value);
 
+        console.log(data.length);
+
         if (data && nodeId) {
           dispatch(setNodeOutput({ id: nodeId, data }));
+
+          getNodeColsCount();
         }
       } catch (error) {
         toast.error('Something went wong. Try again');

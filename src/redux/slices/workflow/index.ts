@@ -59,6 +59,8 @@ export const workflowSlice = createSlice({
     ) => {
       const { id, data } = action.payload;
 
+      console.log(id, data);
+
       state.nodeOutputs = {
         ...state.nodeOutputs,
         [id]: { id, output: data },

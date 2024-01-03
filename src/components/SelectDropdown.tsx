@@ -16,6 +16,7 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
   options,
   value,
   onChange,
+  ...props
 }) => {
   return (
     <div className="flex flex-col gap-1 mb-3">
@@ -25,6 +26,7 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
           `text-sm outline-none bg-navy-600 border border-navy-400 text-white p-1 rounded-md px-2 min-w-[230px] ${className}`
         )}
         onChange={onChange}
+        {...props}
       >
         <option selected disabled className="text-xs lowercase">
           {defaultSelectText ? defaultSelectText : label}

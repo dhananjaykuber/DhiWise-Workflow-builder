@@ -7,12 +7,16 @@ const useNodeColsCount = (nodeId: string) => {
   const [nodeColsCount, setNodeColsCount] = useState<number>(0);
 
   useEffect(() => {
+    getNodeColsCount();
+  }, [nodeId, nodeOutputs]);
+
+  const getNodeColsCount = () => {
     if (nodeId && nodeOutputs[nodeId]?.output?.length > 0) {
       setNodeColsCount(nodeOutputs[nodeId].output.length);
     }
-  }, [nodeId]);
+  };
 
-  return { nodeColsCount };
+  return { nodeColsCount, getNodeColsCount };
 };
 
 export default useNodeColsCount;
