@@ -9,21 +9,6 @@ import { useEffect, useState } from 'react';
 import useGetColumns from '../hooks/useGetColumns';
 import { setNodeOutput } from '../redux/slices/workflow';
 
-// const columnNames: SelectOption[] = [
-//   {
-//     text: 'Year',
-//   },
-//   {
-//     text: 'Units',
-//   },
-//   {
-//     text: 'Value',
-//   },
-//   {
-//     text: 'Industry Code',
-//   },
-// ];
-
 const orders: SelectOption[] = [
   {
     text: 'Ascending',
@@ -40,7 +25,6 @@ const handles: HandleType[] = [
 
 const SortNode = () => {
   const dispatch = useAppDispatch();
-
   const { nodeOutputs } = useAppSelector((store) => store.workflow);
 
   // nodeid inbuilt hook
