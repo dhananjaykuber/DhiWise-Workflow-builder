@@ -8,8 +8,8 @@ import useGetColumns from '../../hooks/useGetColumns';
 import { useAppSelector } from '../../redux/hooks';
 import { Conditions } from '../../data/index';
 import useGetSource from '../../hooks/useGetSource';
-import useFilterData from '../../hooks/useFilterData';
 import toast from 'react-hot-toast';
+import useFindData from '../../hooks/useFindData';
 
 const handles: HandleType[] = [
   { type: 'target', position: Position.Left, id: 'left' },
@@ -30,8 +30,8 @@ const FilterNode = () => {
   // get column names for selct options from custom hook
   const { getLeftColumnsForSelectOptions } = useGetColumns();
 
-  // custom filter data hook
-  const { filterBasedOnStringCondition } = useFilterData();
+  // custom find data hook
+  const { findBasedOnStringCondition } = useFindData();
 
   const [columnNames, setColumnNames] = useState<SelectOption[]>([]);
   const [conditions, setConditions] = useState<SelectOption[]>([]);
@@ -79,7 +79,7 @@ const FilterNode = () => {
   const handleRun = () => {
     if (inputRef.current && selectedColumn && selectedCondition) {
       if (!inputRef?.current?.value) {
-        toast.error('Please enter value.');
+        toast.error('Please enter search term.');
         return;
       }
 
@@ -95,10 +95,10 @@ const FilterNode = () => {
             (column) => column.text === selectedColumn
           );
           if (dataType?.type === 'number') {
-            // call the number filter here
+            // call the number find operation here
           } else {
-            // call the string string here
-            filterBasedOnStringCondition(
+            // call the string find operation here
+            findBasedOnStringCondition(
               nodeId,
               data,
               selectedColumn,
@@ -113,7 +113,7 @@ const FilterNode = () => {
 
   return (
     <CustomNode
-      title="Filter"
+      title="Find"
       showRun={columnNames.length > 0}
       handleRun={handleRun}
       handles={handles}
@@ -135,7 +135,9 @@ const FilterNode = () => {
             onChange={handleConditionChange}
             className="nodrag"
           />
-          {selectedCondition && <InputBox className="nodrag" ref={inputRef} />}
+          {selectedCondition && (
+            <InputBox className="nodrag" ref={inputRef} label="Search term" />
+          )}
         </>
       )}
     </CustomNode>

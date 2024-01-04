@@ -1,48 +1,8 @@
+import { blocksLibrary } from '../data';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { onClose } from '../redux/slices/blockmodal';
 import Block from './Block';
 import Modal from './Modal';
-
-const blocksLibrary = [
-  {
-    title: 'Input',
-    blocks: [
-      {
-        title: 'File',
-        type: 'fileNode',
-        desc: 'Handles csv, json or geojson files.',
-        input: '',
-        output: 'Dataset, Geojson',
-      },
-    ],
-  },
-  {
-    title: 'Transforms',
-    blocks: [
-      {
-        title: 'Filter',
-        type: 'filterNode',
-        desc: 'Group a dataset based on a given column name.',
-        input: 'Dataset',
-        output: 'Dataset',
-      },
-      {
-        title: 'Sort',
-        type: 'sortNode',
-        desc: 'Sort data based on a given column.',
-        input: 'Dataset ',
-        output: 'Dataset',
-      },
-      {
-        title: 'Slice',
-        type: 'sliceNode',
-        desc: 'Slice a dataset based on indices.',
-        input: 'Dataset ',
-        output: 'Dataset',
-      },
-    ],
-  },
-];
 
 const BlockModal = () => {
   const dispatch = useAppDispatch();

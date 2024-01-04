@@ -21,7 +21,7 @@
   fill: white !important;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 0px;
 }
 
@@ -47,4 +47,4 @@
 
 ::-webkit-scrollbar-track:horizontal {
   background-color: transparent;
-}
+} */

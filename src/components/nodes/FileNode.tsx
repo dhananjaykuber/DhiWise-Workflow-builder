@@ -46,7 +46,7 @@ const FileNode = () => {
 
   return (
     <CustomNode title="File" handles={handles}>
-      <p className="text-gray-400 text-sm mb-2">Allowed types: csv, json</p>
+      <p className="text-gray-400 text-sm mb-2">Allowed types: csv</p>
       {fileName ? (
         <div>
           <label className="text-gray-400 text-sm">Selected file:</label>

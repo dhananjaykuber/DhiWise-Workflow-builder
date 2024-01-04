@@ -1,4 +1,4 @@
-import { Position } from 'reactflow';
+import { Edge, Position } from 'reactflow';
 
 export interface SelectOption {
   text: string;
@@ -22,4 +22,10 @@ export interface NodeOutput {
 export interface TableColumn {
   Header: string;
   accessor: string;
+}
+
+export interface Workflow {
+  name: string;
+  nodes: Node[];
+  edges: Edge[];
 }

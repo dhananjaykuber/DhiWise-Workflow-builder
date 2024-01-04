@@ -1,24 +1,17 @@
-import Canvas from './components/Canvas';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
-import LeftPanel from './components/LeftPanel';
-import OutputPanel from './components/OutputPanel';
+import Home from './pages/Home';
+import WorkflowBuilder from './pages/WorkflowBuilder';
 
 export default function App() {
   return (
-    <Layout>
-      <div
-        className="flex h-full resizable-pane"
-        style={{
-          minHeight: '30%',
-          maxHeight: '70%', //change to 90%
-          resize: 'vertical',
-          overflow: 'hidden',
-        }}
-      >
-        <LeftPanel />
-        <Canvas />
-      </div>
-      <OutputPanel />
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/:id" element={<WorkflowBuilder />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }

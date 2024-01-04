@@ -11,8 +11,8 @@ const useGetDatasetInformation = () => {
     // rows count
     if (
       nodeId &&
-      nodeOutputs[nodeId].output &&
-      nodeOutputs[nodeId].output.length > 0
+      nodeOutputs[nodeId]?.output &&
+      nodeOutputs[nodeId]?.output.length > 0
     ) {
       return {
         rowsCount: nodeOutputs[nodeId].output.length,

@@ -22,7 +22,9 @@ const ExportCSV = () => {
     }
 
     if (currentSelected) {
-      const data = nodeOutputs[currentSelected].output;
+      const data = nodeOutputs[currentSelected]?.output;
+
+      if (!data) return;
 
       let blob = new Blob([JSON.stringify(data)], type);
 
@@ -42,7 +44,7 @@ const ExportCSV = () => {
     setShowUl(false);
   };
 
-  if (!currentSelected || nodeOutputs[currentSelected].output.length === 0) {
+  if (!currentSelected || nodeOutputs[currentSelected]?.output?.length === 0) {
     return null;
   }
 

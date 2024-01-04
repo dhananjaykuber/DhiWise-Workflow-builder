@@ -33,3 +33,51 @@ export const Conditions = {
     { text: 'data matches regex' },
   ],
 };
+
+export const blocksLibrary = [
+  {
+    title: 'Input',
+    blocks: [
+      {
+        title: 'File',
+        type: 'fileNode',
+        desc: 'Handles csv files.',
+        input: 'Dataset (csv file)',
+        output: 'Dataset, csv or json',
+      },
+    ],
+  },
+  {
+    title: 'Transforms',
+    blocks: [
+      {
+        title: 'Filter',
+        type: 'filterNode',
+        desc: 'Filter a dataset based on a given column and condition',
+        input: 'Dataset',
+        output: 'Dataset',
+      },
+      {
+        title: 'Sort',
+        type: 'sortNode',
+        desc: 'Sort dataset based on a given column.',
+        input: 'Dataset ',
+        output: 'Dataset',
+      },
+      {
+        title: 'Slice',
+        type: 'sliceNode',
+        desc: 'Slice a dataset based on indices.',
+        input: 'Dataset ',
+        output: 'Dataset',
+      },
+      {
+        title: 'Find',
+        type: 'findNode',
+        desc: 'Find first occurance of value in given column of dataset.',
+        input: 'Dataset ',
+        output: 'Dataset',
+      },
+    ],
+  },
+];

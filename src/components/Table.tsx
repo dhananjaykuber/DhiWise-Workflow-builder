@@ -17,7 +17,7 @@ const Table = () => {
   useEffect(() => {
     const cols = getColumns(currentSelected || '');
 
-    if (currentSelected && nodeOutputs[currentSelected].output.length > 0) {
+    if (currentSelected && nodeOutputs[currentSelected]?.output?.length > 0) {
       // set cols
       let tableColumns: TableColumn[] = [];
 
@@ -42,7 +42,7 @@ const Table = () => {
       data,
     });
 
-  if (currentSelected && nodeOutputs[currentSelected].output.length < 1) {
+  if (currentSelected && nodeOutputs[currentSelected]?.output?.length < 1) {
     return (
       <div className="mx-2 mt-1 text-xs tracking-wider">
         <span className="text-blue-400">root:</span>{' '}

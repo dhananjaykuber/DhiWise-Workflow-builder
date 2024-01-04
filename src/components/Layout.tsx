@@ -8,7 +8,7 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="w-screen h-screen overflow-hidden bg-navy-700">
+    <div className="relative w-screen h-screen overflow-hidden bg-navy-700">
       <Header />
       {children}
       <ModalProvider />
