@@ -100,10 +100,6 @@ const FilterNode = () => {
               inputRef.current.value
             );
           }
-
-          console.log('Length is here: ', nodeOutputs[nodeId].output.length);
-
-          // getNodeColsCount();
         }
       }
     }

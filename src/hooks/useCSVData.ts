@@ -1,7 +1,7 @@
 const useCSVData = () => {
-  const readCSVData = async (filePath: string) => {
+  const readCSVData = async (fileName: string) => {
     try {
-      const response = await fetch(filePath);
+      const response = await fetch(`/csvs/${fileName}`);
       if (!response.ok) {
         throw new Error('Failed to read csv file');
       }

@@ -115,6 +115,7 @@ const SortNode = () => {
         label="Column name"
         options={columnNames}
         name="column"
+        value={sortOption.column}
         onChange={handleChange}
         className="nodrag"
       />
@@ -122,6 +123,7 @@ const SortNode = () => {
         label="Order"
         options={orders}
         name="order"
+        value={sortOption.order}
         onChange={handleChange}
         className="nodrag"
       />

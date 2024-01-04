@@ -5,16 +5,15 @@ import { SelectOption } from '../types';
 interface SelectDropdownProps
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
-  defaultSelectText?: string;
   options: SelectOption[];
+  value?: string;
 }
 
 const SelectDropdown: FC<SelectDropdownProps> = ({
   label,
-  defaultSelectText,
   className,
   options,
-  // value,
+  value,
   onChange,
   ...props
 }) => {
@@ -31,23 +30,19 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
         className={twMerge(
           `text-sm outline-none bg-navy-600 border border-navy-400 text-white p-1 rounded-md px-2 min-w-[230px] ${className}`
         )}
+        value={value || ''}
         onChange={onChange}
         onClick={stopPropagation}
         {...props}
       >
         <option
-          selected
           disabled
+          selected
+          value=""
           className="text-xs lowercase"
           onClick={stopPropagation}
         >
-          {options?.length == 0 ? (
-            <>&larr; connect dataset...</>
-          ) : defaultSelectText ? (
-            defaultSelectText
-          ) : (
-            label
-          )}
+          {options.length == 0 ? <>&larr; connect dataset...</> : label}
         </option>
         {options?.map((option) => (
           <option

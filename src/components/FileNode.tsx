@@ -20,7 +20,7 @@ const FileNode = () => {
 
   const nodeId = useNodeId();
 
-  const [path, setPath] = useState<string>('');
+  const [fileName, setFileName] = useState<string>('');
 
   // read csv hook
   const { readCSVData } = useCSVData();
@@ -29,12 +29,10 @@ const FileNode = () => {
     const value = e.target.value;
 
     if (value) {
-      setPath(value);
+      setFileName(value);
 
       try {
         const data = await readCSVData(value);
-
-        console.log(data.length);
 
         if (data && nodeId) {
           dispatch(setNodeOutput({ id: nodeId, data }));
@@ -49,12 +47,22 @@ const FileNode = () => {
   return (
     <CustomNode title="File" handles={handles}>
       <p className="text-gray-400 text-sm mb-2">Allowed types: csv, json</p>
-      <SelectDropdown
-        label="File name"
-        options={options}
-        value={path}
-        onChange={handleChange}
-      />
+      {fileName ? (
+        <div>
+          <label className="text-gray-400 text-sm">Selected file:</label>
+          <p className="text-sm outline-none bg-navy-600 border border-navy-400 text-white p-1 rounded-md px-2 min-w-[230px]">
+            {fileName}
+          </p>
+        </div>
+      ) : (
+        <SelectDropdown
+          label="File name"
+          options={options}
+          value={fileName}
+          onChange={handleChange}
+          disabled={fileName.length > 0}
+        />
+      )}
     </CustomNode>
   );
 };
