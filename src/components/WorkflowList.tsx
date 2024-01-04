@@ -18,7 +18,7 @@ const WorkflowList: FC<WorkflowListProps> = ({ workflows }) => {
       </h3>
       <div>
         {workflows.map((workflow, index) => (
-          <p className="text-gray-300 text-sm" key={index}>
+          <p className="text-gray-300 text-sm text-center" key={index}>
             {workflow?.name}
             <Link
               to={workflow?.name}
