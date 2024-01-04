@@ -11,6 +11,7 @@ import { twMerge } from 'tailwind-merge';
 interface CustomNodeProps {
   title: string;
   children: ReactNode;
+  showRun?: boolean;
   handleRun?: () => void;
   datasetInfo?: string | '';
   handles?: HandleType[];
@@ -19,6 +20,7 @@ interface CustomNodeProps {
 const CustomNode: FC<CustomNodeProps> = ({
   title,
   children,
+  showRun = false,
   handleRun,
   datasetInfo = '',
   handles,
@@ -65,7 +67,11 @@ const CustomNode: FC<CustomNodeProps> = ({
           </div>
 
           <div className="p-2">{children}</div>
-          {handleRun && <Button onClick={handleRun}>Run</Button>}
+          {showRun && (
+            <Button onClick={handleRun} className="nodrag">
+              Run
+            </Button>
+          )}
         </div>
         <div className="w-7 bg-navy-300 rounded-r-lg"></div>
       </div>

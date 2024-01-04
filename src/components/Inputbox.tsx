@@ -9,7 +9,7 @@ const InputBox = forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={twMerge(
-          `text-sm outline-none bg-navy-600 border border-navy-400 text-white p-1 rounded-md px-2 min-w-[230px] ${className} mb-2`
+          `text-sm outline-none bg-navy-600 border border-navy-400 text-white p-1 rounded-md px-3 min-w-[230px] ${className} mb-2`
         )}
         disabled={disabled}
         ref={ref}

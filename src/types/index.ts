@@ -3,6 +3,7 @@ import { Position } from 'reactflow';
 export interface SelectOption {
   text: string;
   value?: string;
+  type?: string;
 }
 
 export interface HandleType {

@@ -39,8 +39,8 @@ const SortNode = () => {
   // custom hook to get nodeids
   const { getLeftSourceNodeId } = useGetSource();
 
-  // get column names from custom hook
-  const { getColumns } = useGetColumns();
+  // get column names for selct options from custom hook
+  const { getLeftColumnsForSelectOptions } = useGetColumns();
 
   // states
   const [columnNames, setColumnNames] = useState<SelectOption[]>([]);
@@ -53,15 +53,16 @@ const SortNode = () => {
   });
 
   useEffect(() => {
-    // get the columns of data and set to columnName local state to show column names in select tag
-    const sourceId = getLeftSourceNodeId(nodeId, edges);
+    // get the left connected blocks columns for columns select options
+    if (nodeId) {
+      const selectOptions = getLeftColumnsForSelectOptions(
+        nodeId.toString(),
+        edges
+      );
 
-    if (sourceId) {
-      const transformedCols = getColumns(sourceId).map((item) => ({
-        text: item.key,
-      }));
-
-      setColumnNames(transformedCols);
+      if (selectOptions) {
+        setColumnNames(selectOptions);
+      }
     }
   }, [nodeId, edges, nodeOutputs]);
 
@@ -103,6 +104,8 @@ const SortNode = () => {
 
           dispatch(setNodeOutput({ id: nodeId.toString(), data: sortedData }));
         }
+
+        getNodeColsCount();
       }
     }
   };
@@ -110,6 +113,7 @@ const SortNode = () => {
   return (
     <CustomNode
       title="Sort"
+      showRun={columnNames.length > 0}
       handleRun={handleRun}
       datasetInfo={nodeColsCount > 0 ? `[DATASET] ${nodeColsCount} rows` : ''}
       handles={handles}
@@ -119,12 +123,14 @@ const SortNode = () => {
         options={columnNames}
         name="column"
         onChange={handleChange}
+        className="nodrag"
       />
       <SelectDropdown
         label="Order"
         options={orders}
         name="order"
         onChange={handleChange}
+        className="nodrag"
       />
     </CustomNode>
   );
