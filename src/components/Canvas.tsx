@@ -12,9 +12,8 @@ import ReactFlow, {
   MiniMap,
 } from 'reactflow';
 
-import FileNode from './FileNode';
-import SortNode from './SortNode';
-import FilterNode from './FilterNode';
+import { FileNode, FilterNode, SliceNode, SortNode } from './nodes';
+
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { addEdge, setNodes, setEdges } from '../redux/slices/workflow';
 
@@ -23,6 +22,7 @@ const nodeTypes = {
   fileNode: FileNode,
   sortNode: SortNode,
   filterNode: FilterNode,
+  sliceNode: SliceNode,
 };
 
 // edge options

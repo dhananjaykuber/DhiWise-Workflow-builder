@@ -1,12 +1,12 @@
 import { Position, useEdges, useNodeId } from 'reactflow';
-import { HandleType, SelectOption } from '../types';
-import CustomNode from './CustomNode';
-import SelectDropdown from './SelectDropdown';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import useGetSource from '../hooks/useGetSource';
+import { HandleType, SelectOption } from '../../types';
+import CustomNode from '../CustomNode';
+import SelectDropdown from '../SelectDropdown';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import useGetSource from '../../hooks/useGetSource';
 import { useEffect, useState } from 'react';
-import useGetColumns from '../hooks/useGetColumns';
-import { setNodeOutput } from '../redux/slices/workflow';
+import useGetColumns from '../../hooks/useGetColumns';
+import { setNodeOutput } from '../../redux/slices/workflow';
 
 const orders: SelectOption[] = [
   {

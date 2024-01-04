@@ -1,14 +1,15 @@
 import { Position, useEdges, useNodeId } from 'reactflow';
-import { HandleType, SelectOption } from '../types';
-import CustomNode from './CustomNode';
-import InputBox from './Inputbox';
-import SelectDropdown from './SelectDropdown';
+import { HandleType, SelectOption } from '../../types';
+import CustomNode from '../CustomNode';
+import InputBox from '../Inputbox';
+import SelectDropdown from '../SelectDropdown';
 import { useEffect, useRef, useState } from 'react';
-import useGetColumns from '../hooks/useGetColumns';
-import { useAppSelector } from '../redux/hooks';
-import { Conditions } from '../data/index';
-import useGetSource from '../hooks/useGetSource';
-import useFilterData from '../hooks/useFilterData';
+import useGetColumns from '../../hooks/useGetColumns';
+import { useAppSelector } from '../../redux/hooks';
+import { Conditions } from '../../data/index';
+import useGetSource from '../../hooks/useGetSource';
+import useFilterData from '../../hooks/useFilterData';
+import toast from 'react-hot-toast';
 
 const handles: HandleType[] = [
   { type: 'target', position: Position.Left, id: 'left' },
@@ -77,6 +78,11 @@ const FilterNode = () => {
   // handle all oprations for filter
   const handleRun = () => {
     if (inputRef.current && selectedColumn && selectedCondition) {
+      if (!inputRef?.current?.value) {
+        toast.error('Please enter value.');
+        return;
+      }
+
       if (nodeId) {
         // get the oputput of connected node on left handle
         const id = getLeftSourceNodeId(nodeId, edges);

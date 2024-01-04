@@ -1,13 +1,13 @@
 import { Position, useNodeId } from 'reactflow';
-import { HandleType, SelectOption } from '../types';
-import CustomNode from './CustomNode';
-import SelectDropdown from './SelectDropdown';
-import { CSVData } from '../data';
+import { HandleType, SelectOption } from '../../types';
+import CustomNode from '../CustomNode';
+import SelectDropdown from '../SelectDropdown';
+import { CSVData } from '../../data';
 import { useState } from 'react';
-import useCSVData from '../hooks/useCSVData';
+import useCSVData from '../../hooks/useCSVData';
 import toast from 'react-hot-toast';
-import { setNodeOutput } from '../redux/slices/workflow';
-import { useAppDispatch } from '../redux/hooks';
+import { setNodeOutput } from '../../redux/slices/workflow';
+import { useAppDispatch } from '../../redux/hooks';
 
 const options: SelectOption[] = CSVData;
 
