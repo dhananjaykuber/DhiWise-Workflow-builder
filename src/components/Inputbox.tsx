@@ -5,6 +5,10 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const InputBox = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, disabled, ...props }, ref) => {
+    const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
+      e.stopPropagation();
+    };
+
     return (
       <input
         type={type}
@@ -13,6 +17,7 @@ const InputBox = forwardRef<HTMLInputElement, InputProps>(
         )}
         disabled={disabled}
         ref={ref}
+        onClick={handleClick}
         {...props}
       />
     );

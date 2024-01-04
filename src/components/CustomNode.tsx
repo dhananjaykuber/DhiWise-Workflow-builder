@@ -7,13 +7,13 @@ import { useNodeId } from 'reactflow';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { removeNode, setCurrentSelected } from '../redux/slices/workflow';
 import { twMerge } from 'tailwind-merge';
+import DatasetInformation from './DatasetInformation';
 
 interface CustomNodeProps {
   title: string;
   children: ReactNode;
   showRun?: boolean;
   handleRun?: () => void;
-  datasetInfo?: string | '';
   handles?: HandleType[];
 }
 
@@ -22,7 +22,6 @@ const CustomNode: FC<CustomNodeProps> = ({
   children,
   showRun = false,
   handleRun,
-  datasetInfo = '',
   handles,
 }) => {
   const dispatch = useAppDispatch();
@@ -84,9 +83,7 @@ const CustomNode: FC<CustomNodeProps> = ({
         />
       ))}
 
-      {datasetInfo && (
-        <p className="text-xs mt-1 text-gray-200">{datasetInfo}</p>
-      )}
+      <DatasetInformation nodeId={nodeId?.toString() || ''} />
     </div>
   );
 };

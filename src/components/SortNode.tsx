@@ -2,7 +2,6 @@ import { Position, useEdges, useNodeId } from 'reactflow';
 import { HandleType, SelectOption } from '../types';
 import CustomNode from './CustomNode';
 import SelectDropdown from './SelectDropdown';
-import useNodeColsCount from '../hooks/useNodeColsCount';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import useGetSource from '../hooks/useGetSource';
 import { useEffect, useState } from 'react';
@@ -32,9 +31,6 @@ const SortNode = () => {
 
   // inbuilt hook that gives all the edges
   const edges = useEdges();
-
-  // node cols count hook
-  const { nodeColsCount, getNodeColsCount } = useNodeColsCount(nodeId || '');
 
   // custom hook to get nodeids
   const { getLeftSourceNodeId } = useGetSource();
@@ -104,8 +100,6 @@ const SortNode = () => {
 
           dispatch(setNodeOutput({ id: nodeId.toString(), data: sortedData }));
         }
-
-        getNodeColsCount();
       }
     }
   };
@@ -115,7 +109,6 @@ const SortNode = () => {
       title="Sort"
       showRun={columnNames.length > 0}
       handleRun={handleRun}
-      datasetInfo={nodeColsCount > 0 ? `[DATASET] ${nodeColsCount} rows` : ''}
       handles={handles}
     >
       <SelectDropdown

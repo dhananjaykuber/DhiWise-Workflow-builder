@@ -16,10 +16,16 @@ const useFilterData = () => {
     condition: string,
     inputValue: string
   ) => {
+    if (!nodeId || !data || !columnName || !condition || !inputValue) {
+      return;
+    }
+
     console.log({ nodeId, data, columnName, condition, inputValue });
 
     const filteredData = data?.filter((item: any) => {
       const columnValue = item[columnName];
+
+      if (!columnValue) return;
 
       switch (condition) {
         case 'text is exactly':

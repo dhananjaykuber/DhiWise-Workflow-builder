@@ -8,7 +8,6 @@ import useCSVData from '../hooks/useCSVData';
 import toast from 'react-hot-toast';
 import { setNodeOutput } from '../redux/slices/workflow';
 import { useAppDispatch } from '../redux/hooks';
-import useNodeColsCount from '../hooks/useNodeColsCount';
 
 const options: SelectOption[] = CSVData;
 
@@ -22,9 +21,6 @@ const FileNode = () => {
   const nodeId = useNodeId();
 
   const [path, setPath] = useState<string>('');
-
-  // node cols count hook
-  const { nodeColsCount, getNodeColsCount } = useNodeColsCount(nodeId || '');
 
   // read csv hook
   const { readCSVData } = useCSVData();
@@ -42,8 +38,6 @@ const FileNode = () => {
 
         if (data && nodeId) {
           dispatch(setNodeOutput({ id: nodeId, data }));
-
-          getNodeColsCount();
         }
       } catch (error) {
         toast.error('Something went wong. Try again');
@@ -53,11 +47,7 @@ const FileNode = () => {
   };
 
   return (
-    <CustomNode
-      title="File"
-      handles={handles}
-      datasetInfo={nodeColsCount > 0 ? `[DATASET] ${nodeColsCount} rows` : ''}
-    >
+    <CustomNode title="File" handles={handles}>
       <p className="text-gray-400 text-sm mb-2">Allowed types: csv, json</p>
       <SelectDropdown
         label="File name"

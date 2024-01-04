@@ -42,6 +42,16 @@ const Table = () => {
       data,
     });
 
+  if (currentSelected && nodeOutputs[currentSelected].output.length < 1) {
+    return (
+      <div className="mx-2 mt-1 text-xs tracking-wider">
+        <span className="text-blue-400">root:</span>{' '}
+        <span className="text-gray-600"> &#91; &#93; </span>
+        <span className="text-gray-600 align-text-top">0 items</span>
+      </div>
+    );
+  }
+
   return (
     <table {...getTableProps()} className="border-collapse">
       <thead className="bg-navy-600 text-white font-semibold text-xs">

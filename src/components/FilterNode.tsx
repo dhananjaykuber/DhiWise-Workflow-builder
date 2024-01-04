@@ -3,7 +3,6 @@ import { HandleType, SelectOption } from '../types';
 import CustomNode from './CustomNode';
 import InputBox from './Inputbox';
 import SelectDropdown from './SelectDropdown';
-import useNodeColsCount from '../hooks/useNodeColsCount';
 import { useEffect, useRef, useState } from 'react';
 import useGetColumns from '../hooks/useGetColumns';
 import { useAppSelector } from '../redux/hooks';
@@ -23,10 +22,6 @@ const FilterNode = () => {
 
   // inbuilt hook that gives all the edges
   const edges = useEdges();
-
-  // node cols count hook
-  const { nodeColsCount, getNodeColsCount } = useNodeColsCount(nodeId || '');
-  console.log(nodeColsCount);
 
   // custom hook to get nodeids
   const { getLeftSourceNodeId } = useGetSource();
@@ -81,7 +76,7 @@ const FilterNode = () => {
 
   // handle all oprations for filter
   const handleRun = () => {
-    if (inputRef.current) {
+    if (inputRef.current && selectedColumn && selectedCondition) {
       if (nodeId) {
         // get the oputput of connected node on left handle
         const id = getLeftSourceNodeId(nodeId, edges);
@@ -106,7 +101,9 @@ const FilterNode = () => {
             );
           }
 
-          getNodeColsCount();
+          console.log('Length is here: ', nodeOutputs[nodeId].output.length);
+
+          // getNodeColsCount();
         }
       }
     }
@@ -117,7 +114,6 @@ const FilterNode = () => {
       title="Filter"
       showRun={columnNames.length > 0}
       handleRun={handleRun}
-      datasetInfo={nodeColsCount > 0 ? `[DATASET] ${nodeColsCount} rows` : ''}
       handles={handles}
     >
       <SelectDropdown

@@ -14,7 +14,7 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
   defaultSelectText,
   className,
   options,
-  value,
+  // value,
   onChange,
   ...props
 }) => {
