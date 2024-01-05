@@ -35,20 +35,34 @@ export const workflowSlice = createSlice({
     },
     removeNode: (state, action: PayloadAction<string>) => {
       const nodeIdToDelete = action.payload;
+
+      // delete node
       const updatedNodes = state.nodes.filter(
         (node) => node.id != nodeIdToDelete
+      );
+
+      // delete associated edges
+      const updatedEdges = state.edges.filter(
+        (edge) => !edge.id.includes(nodeIdToDelete)
       );
 
       return {
         ...state,
         nodes: updatedNodes,
+        edges: updatedEdges,
       };
     },
     setEdges: (state, action: PayloadAction<Edge[]>) => {
       state.edges = action.payload;
     },
     addEdge: (state, action: PayloadAction<Edge>) => {
-      state.edges.push(action.payload);
+      const edgeId = action.payload.id;
+
+      const edgeExist = state.edges.find((item) => item.id === edgeId);
+
+      if (!edgeExist) {
+        state.edges.push(action.payload);
+      }
     },
     setCurrentSelected: (state, action: PayloadAction<string | null>) => {
       state.currentSelected = action.payload;

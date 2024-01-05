@@ -31,7 +31,6 @@ const CustomNode: FC<CustomNodeProps> = ({
   const nodeId = useNodeId();
 
   const handleRemoveNode = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // TODO: need to remove all the edges associated with this node
     e.stopPropagation();
     if (nodeId) {
       dispatch(removeNode(nodeId.toString()));
