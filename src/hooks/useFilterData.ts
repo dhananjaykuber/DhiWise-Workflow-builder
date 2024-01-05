@@ -1,7 +1,6 @@
 import toast from 'react-hot-toast';
 import { useAppDispatch } from '../redux/hooks';
 import { setNodeOutput } from '../redux/slices/workflow';
-import { useState } from 'react';
 
 const useFilterData = () => {
   const dispatch = useAppDispatch();
@@ -37,9 +36,9 @@ const useFilterData = () => {
             columnValue !== undefined &&
             columnValue !== ''
           );
-        // case 'data matches regex':
-        //   const regex = new RegExp(value);
-        //   return regex.test(columnValue);
+        case 'data matches regex':
+          const regex = new RegExp(inputValue);
+          return regex.test(columnValue);
         default:
           return true;
       }
@@ -58,7 +57,7 @@ const useFilterData = () => {
     if (!nodeId || !data || !columnName || !condition || !inputValue) {
       return;
     }
-    if (isNaN(Number(inputValue))) {
+    if (condition !== 'data matches regex' && isNaN(Number(inputValue))) {
       toast.error('Please enter valid number');
       return;
     }
@@ -87,9 +86,9 @@ const useFilterData = () => {
             columnValue !== undefined &&
             columnValue !== ''
           );
-        // case 'data matches regex':
-        //   const regex = new RegExp(value);
-        //   return regex.test(columnValue);
+        case 'data matches regex':
+          const regex = new RegExp(inputValue);
+          return regex.test(columnValue);
         default:
           return true;
       }

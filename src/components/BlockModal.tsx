@@ -16,7 +16,7 @@ const BlockModal = () => {
           <div className="uppercase text-white text-xs tracking-wider font-medium">
             {library.title}
           </div>
-          <div className="grid grid-cols-3 gap-4 mt-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-3">
             {library.blocks?.map((block) => (
               <Block key={block.type} data={block} />
             ))}
