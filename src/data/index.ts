@@ -84,3 +84,5 @@ export const blocksLibrary = [
     ],
   },
 ];
+
+export const ROWS_PER_SCROLL: number = 100;
