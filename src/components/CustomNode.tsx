@@ -66,8 +66,11 @@ const CustomNode: FC<CustomNodeProps> = ({
 
           <div className="p-2">{children}</div>
           {showRun && (
-            <Button onClick={handleRun} className="nodrag">
-              Run
+            <Button
+              onClick={handleRun}
+              className="nodrag disabled:bg-navy-500/55"
+            >
+              RUN
             </Button>
           )}
         </div>

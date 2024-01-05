@@ -81,8 +81,6 @@ const SortNode = () => {
       if (id) {
         const data = nodeOutputs[id].output;
 
-        console.log(data);
-
         // sorting data
         if (sortOption.column && sortOption.order) {
           const sortedData = [...data].sort((a, b) => {

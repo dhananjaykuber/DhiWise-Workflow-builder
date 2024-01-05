@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../redux/hooks';
 import Button from './Button';
 import toast from 'react-hot-toast';
@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 const Header = () => {
   const { nodes, edges } = useAppSelector((store) => store.workflow);
 
-  // const { id } = useParams();
   const { pathname } = useLocation();
 
   // check already exist, if exist then update otherwise create new

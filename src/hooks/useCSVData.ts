@@ -1,7 +1,12 @@
 import Papa from 'papaparse';
+import { useState } from 'react';
 
 const useCSVData = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+
   const readCSVData = async (fileName: string) => {
+    setLoading(true);
+
     try {
       const response = await fetch(`/csvs/${fileName}`);
       if (!response.ok) {
@@ -16,15 +21,18 @@ const useCSVData = () => {
           header: true,
           skipEmptyLines: true,
           complete: (result) => {
+            setLoading(false);
             resolve(result.data);
           },
           error: (error: Error) => {
+            setLoading(false);
             console.error(error);
             reject(error);
           },
         });
       });
 
+      setLoading(false);
       return logicRes;
     } catch (error) {
       console.error(error);
@@ -32,7 +40,7 @@ const useCSVData = () => {
     }
   };
 
-  return { readCSVData };
+  return { loading, readCSVData };
 };
 
 export default useCSVData;

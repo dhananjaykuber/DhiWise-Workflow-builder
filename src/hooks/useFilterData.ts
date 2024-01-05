@@ -1,13 +1,9 @@
 import toast from 'react-hot-toast';
 import { useAppDispatch } from '../redux/hooks';
 import { setNodeOutput } from '../redux/slices/workflow';
+import { useState } from 'react';
 
 const useFilterData = () => {
-  // data -> left block output
-  // colunmName
-  // condition
-  // inputValue
-
   const dispatch = useAppDispatch();
 
   const filterBasedOnStringCondition = (
@@ -20,8 +16,6 @@ const useFilterData = () => {
     if (!nodeId || !data || !columnName || !condition || !inputValue) {
       return;
     }
-
-    // console.log({ nodeId, data, columnName, condition, inputValue });
 
     const filteredData = data?.filter((item: any) => {
       const columnValue = item[columnName];
@@ -71,8 +65,6 @@ const useFilterData = () => {
 
     const inputNumber = parseFloat(inputValue);
 
-    // console.log({ nodeId, data, columnName, condition, inputValue });
-
     const filteredData = data?.filter((item: any) => {
       const columnValue = item[columnName];
 
@@ -106,7 +98,10 @@ const useFilterData = () => {
     dispatch(setNodeOutput({ id: nodeId, data: filteredData }));
   };
 
-  return { filterBasedOnStringCondition, filterBasedOnNumberCondition };
+  return {
+    filterBasedOnStringCondition,
+    filterBasedOnNumberCondition,
+  };
 };
 
 export default useFilterData;

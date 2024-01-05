@@ -8,6 +8,7 @@ import useCSVData from '../../hooks/useCSVData';
 import toast from 'react-hot-toast';
 import { setNodeOutput } from '../../redux/slices/workflow';
 import { useAppDispatch } from '../../redux/hooks';
+import { Loader2 } from 'lucide-react';
 
 const options: SelectOption[] = CSVData;
 
@@ -23,7 +24,7 @@ const FileNode = () => {
   const [fileName, setFileName] = useState<string>('');
 
   // read csv hook
-  const { readCSVData } = useCSVData();
+  const { loading, readCSVData } = useCSVData();
 
   const handleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -47,7 +48,14 @@ const FileNode = () => {
   return (
     <CustomNode title="File" handles={handles}>
       <p className="text-gray-400 text-sm mb-2">Allowed types: csv</p>
-      {fileName ? (
+
+      {loading ? (
+        <div>
+          <p className="text-sm outline-none bg-navy-600 border border-navy-400 text-gray-300 p-1 rounded-md px-2 min-w-[230px]">
+            Loading file...
+          </p>
+        </div>
+      ) : fileName ? (
         <div>
           <label className="text-gray-400 text-sm">Selected file:</label>
           <p className="text-sm outline-none bg-navy-600 border border-navy-400 text-white p-1 rounded-md px-2 min-w-[230px]">
