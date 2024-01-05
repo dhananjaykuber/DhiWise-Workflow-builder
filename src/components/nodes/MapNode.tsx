@@ -6,17 +6,17 @@ import SelectDropdown from '../SelectDropdown';
 import { useEffect, useRef, useState } from 'react';
 import useGetColumns from '../../hooks/useGetColumns';
 import { useAppSelector } from '../../redux/hooks';
-import { FilterConditions as FindConditions } from '../../data/index';
+import { MapConditions } from '../../data/index';
 import useGetSource from '../../hooks/useGetSource';
 import toast from 'react-hot-toast';
-import useFindData from '../../hooks/useFindData';
+import useMapData from '../../hooks/useMapData';
 
 const handles: HandleType[] = [
   { type: 'target', position: Position.Left, id: 'left' },
   { type: 'source', position: Position.Right, id: 'right' },
 ];
 
-const FilterNode = () => {
+const MapNode = () => {
   const { nodeOutputs } = useAppSelector((store) => store.workflow);
 
   const nodeId = useNodeId();
@@ -30,8 +30,8 @@ const FilterNode = () => {
   // get column names for selct options from custom hook
   const { getLeftColumnsForSelectOptions } = useGetColumns();
 
-  // custom find data hook
-  const { findBasedOnStringCondition } = useFindData();
+  // custom map data hook
+  const { mapBasedOnNumberCondition, mapBasedOnStringCondition } = useMapData();
 
   const [columnNames, setColumnNames] = useState<SelectOption[]>([]);
   const [conditions, setConditions] = useState<SelectOption[]>([]);
@@ -57,15 +57,14 @@ const FilterNode = () => {
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const value = e.target.value;
-
     setSelectedColumn(value);
 
     // get the datatype of column
     const dataType = columnNames.find((column) => column.text === value);
     if (dataType?.type === 'number') {
-      setConditions(FindConditions.number);
+      setConditions(MapConditions.number);
     } else {
-      setConditions(FindConditions.string);
+      setConditions(MapConditions.string);
     }
   };
 
@@ -77,33 +76,40 @@ const FilterNode = () => {
 
   // handle all oprations for filter
   const handleRun = () => {
-    if (inputRef.current && selectedColumn && selectedCondition) {
-      if (!inputRef?.current?.value) {
-        toast.error('Please enter search term.');
-        return;
-      }
-
+    if (selectedColumn && selectedCondition) {
       if (nodeId) {
+        console.log(selectedColumn, selectedCondition);
+
         // get the oputput of connected node on left handle
         const id = getLeftSourceNodeId(nodeId, edges);
 
         if (id) {
           const data = nodeOutputs[id].output;
 
+          console.log(data);
+
           // get the datatype selected of column
           const dataType = columnNames.find(
             (column) => column.text === selectedColumn
           );
+          console.log(dataType);
           if (dataType?.type === 'number') {
-            // call the number find operation here
-          } else {
-            // call the string find operation here
-            findBasedOnStringCondition(
+            // call the number mapper here
+            mapBasedOnNumberCondition(
               nodeId,
               data,
               selectedColumn,
               selectedCondition,
-              inputRef.current.value
+              inputRef?.current?.value || ''
+            );
+          } else {
+            // call the string mapper here
+            mapBasedOnStringCondition(
+              nodeId,
+              data,
+              selectedColumn,
+              selectedCondition,
+              inputRef?.current?.value || ''
             );
           }
         }
@@ -111,9 +117,31 @@ const FilterNode = () => {
     }
   };
 
+  // Input render function
+  const renderInputBoxForInteger = () => {
+    if (selectedCondition) {
+      if (
+        selectedCondition === 'addition' ||
+        selectedCondition === 'multiplication' ||
+        selectedCondition === 'division' ||
+        selectedCondition === 'subtraction' ||
+        selectedCondition === 'concatinate the string'
+      ) {
+        return (
+          <InputBox
+            className="nodrag w-[272px]"
+            ref={inputRef}
+            placeholder="Enter value"
+          />
+        );
+      }
+    }
+    return null;
+  };
+
   return (
     <CustomNode
-      title="Find"
+      title="Map"
       showRun={columnNames.length > 0}
       handleRun={handleRun}
       handles={handles}
@@ -135,13 +163,11 @@ const FilterNode = () => {
             onChange={handleConditionChange}
             className="nodrag"
           />
-          {selectedCondition && (
-            <InputBox className="nodrag" ref={inputRef} label="Search term" />
-          )}
+          {selectedCondition && renderInputBoxForInteger()}
         </>
       )}
     </CustomNode>
   );
 };
 
-export default FilterNode;
+export default MapNode;

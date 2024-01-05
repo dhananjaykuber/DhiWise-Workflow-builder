@@ -6,7 +6,7 @@ import SelectDropdown from '../SelectDropdown';
 import { useEffect, useRef, useState } from 'react';
 import useGetColumns from '../../hooks/useGetColumns';
 import { useAppSelector } from '../../redux/hooks';
-import { Conditions } from '../../data/index';
+import { FilterConditions } from '../../data/index';
 import useGetSource from '../../hooks/useGetSource';
 import useFilterData from '../../hooks/useFilterData';
 import toast from 'react-hot-toast';
@@ -64,9 +64,9 @@ const FilterNode = () => {
     // get the datatype of column
     const dataType = columnNames.find((column) => column.text === value);
     if (dataType?.type === 'number') {
-      setConditions(Conditions.number);
+      setConditions(FilterConditions.number);
     } else {
-      setConditions(Conditions.string);
+      setConditions(FilterConditions.string);
     }
   };
 

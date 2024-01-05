@@ -20,31 +20,3 @@
 .react-flow__controls-button svg {
   fill: white !important;
 }
-
-/* ::-webkit-scrollbar {
-  width: 0px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1d172e;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #222331;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #13142e;
-}
-
-::-webkit-scrollbar {
-  width: 0rem;
-}
-
-::-webkit-scrollbar-thumb:horizontal {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-track:horizontal {
-  background-color: transparent;
-} */

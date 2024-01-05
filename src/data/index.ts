@@ -20,7 +20,7 @@ export const CSVData = [
   },
 ];
 
-export const Conditions = {
+export const FilterConditions = {
   number: [
     { text: 'number equals' },
     { text: 'number is greater than' },
@@ -37,6 +37,24 @@ export const Conditions = {
     { text: 'text does not includes' },
     { text: 'data is not empty or null' },
     { text: 'data matches regex' },
+  ],
+};
+
+export const MapConditions = {
+  number: [
+    { text: 'addition' },
+    { text: 'subtraction' },
+    { text: 'division' },
+    { text: 'multiplication' },
+    { text: 'round numbers to the nearest integer' },
+    { text: 'round down' },
+    { text: 'round up' },
+  ],
+  string: [
+    { text: 'change to uppercase' },
+    { text: 'change to lowercase' },
+    { text: 'concatinate the string' },
+    { text: 'trim' },
   ],
 };
 
@@ -67,21 +85,28 @@ export const blocksLibrary = [
         title: 'Sort',
         type: 'sortNode',
         desc: 'Sort dataset based on a given column.',
-        input: 'Dataset ',
+        input: 'Dataset',
         output: 'Dataset',
       },
       {
         title: 'Slice',
         type: 'sliceNode',
         desc: 'Slice a dataset based on indices.',
-        input: 'Dataset ',
+        input: 'Dataset',
         output: 'Dataset',
       },
       {
         title: 'Find',
         type: 'findNode',
         desc: 'Find first occurance of value in given column of dataset.',
-        input: 'Dataset ',
+        input: 'Dataset',
+        output: 'Dataset',
+      },
+      {
+        title: 'Map',
+        type: 'mapNode',
+        desc: 'Modify or transform dataset values based on mapping rules.',
+        input: 'Dataset',
         output: 'Dataset',
       },
     ],

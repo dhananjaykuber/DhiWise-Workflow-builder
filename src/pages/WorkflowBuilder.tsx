@@ -43,10 +43,10 @@ const WorkflowBuilder = () => {
         }}
       >
         <Button
-          className="flex gap-1 bg-transparent border border-navy-100 rounded-full hover:bg-navy-600 w-fit px-3 absolute m-2 z-40 capitalize"
+          className="flex gap-1 bg-navy-700 font-semibold border border-navy-100 rounded-full hover:bg-navy-600 w-fit px-3 absolute m-2 z-40 lowercase"
           onClick={() => dispatch(onOpen())}
         >
-          <Plus className="w-4 h-4" /> Add Block
+          <Plus className="w-4 h-4" /> block
         </Button>
 
         <Canvas />
