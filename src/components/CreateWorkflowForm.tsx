@@ -59,15 +59,15 @@ const CreateWorkflowForm = () => {
   };
 
   return (
-    <form>
+    <form className="w-full">
       <InputBox
         label="Workspace Name"
         placeholder="Enter workspace name"
-        className="w-[400px]"
+        className="w-full"
         ref={inputRef}
       />
       <Button
-        className="rounded-md"
+        className="rounded-md w-full"
         type="submit"
         onClick={handleCreateWorkspace}
       >

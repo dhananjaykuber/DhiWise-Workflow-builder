@@ -1,10 +1,12 @@
-import LeftPanel from '../components/LeftPanel';
 import Canvas from '../components/Canvas';
 import OutputPanel from '../components/OutputPanel';
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../redux/hooks';
 import { setEdges, setNodes } from '../redux/slices/workflow';
+import Button from '../components/Button';
+import { Plus } from 'lucide-react';
+import { onOpen } from '../redux/slices/blockmodal';
 
 const WorkflowBuilder = () => {
   const { pathname } = useLocation();
@@ -32,15 +34,21 @@ const WorkflowBuilder = () => {
   return (
     <>
       <div
-        className="flex h-full resizable-pane"
+        className="flex h-full resizable-pane relative"
         style={{
           minHeight: '30%',
-          maxHeight: '70%', //change to 90%
+          maxHeight: '90%',
           resize: 'vertical',
           overflow: 'hidden',
         }}
       >
-        <LeftPanel />
+        <Button
+          className="flex gap-1 bg-transparent border border-navy-100 rounded-full hover:bg-navy-600 w-fit px-3 absolute m-2 z-50 capitalize"
+          onClick={() => dispatch(onOpen())}
+        >
+          <Plus className="w-4 h-4" /> Add Block
+        </Button>
+
         <Canvas />
       </div>
       <OutputPanel />
