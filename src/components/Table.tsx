@@ -52,6 +52,7 @@ const Table: React.FC = () => {
 
     if (bottom && !isLoading && hasMore) {
       setIsLoading(true);
+
       setScrollPosition(target.scrollTop);
 
       setTimeout(() => {
@@ -62,7 +63,7 @@ const Table: React.FC = () => {
             data.length + ROWS_PER_SCROLL
           );
 
-          if (newChunk) {
+          if (newChunk.length > 0) {
             setData((prevData) => [...prevData, ...newChunk]);
           } else {
             setHasMore(false);
@@ -74,13 +75,23 @@ const Table: React.FC = () => {
     }
   };
 
+  if (currentSelected && nodeOutputs[currentSelected]?.output?.length < 1) {
+    return (
+      <div className="mx-2 mt-1 text-xs tracking-wider">
+        <span className="text-blue-400">root:</span>{' '}
+        <span className="text-gray-600"> &#91; &#93; </span>
+        <span className="text-gray-600 align-text-top">0 items</span>
+      </div>
+    );
+  }
+
   return (
     <div
       onScroll={handleScroll}
       style={{
-        maxHeight: '300px',
+        maxHeight: '400px',
         overflowY: 'scroll',
-        paddingBottom: '100px',
+        paddingBottom: '20px',
       }}
     >
       <table {...getTableProps()} className="border-collapse">
@@ -111,7 +122,7 @@ const Table: React.FC = () => {
                 {row.cells.map((cell) => (
                   <td
                     {...cell.getCellProps()}
-                    className="border border-navy-500 p-1"
+                    className="border border-navy-500 p-1 truncate"
                     key={cell.row.index + '-' + cell.column.id}
                   >
                     {cell.render('Cell')}

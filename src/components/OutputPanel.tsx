@@ -12,7 +12,7 @@ const OutputPanel: FC = () => {
         <ExportCSV />
       </div>
 
-      <div className="overflow-y-auto h-[100vh] pb-[300px]">
+      <div className="overflow-y-auto max-h-[400px]">
         <Table />
       </div>
     </div>

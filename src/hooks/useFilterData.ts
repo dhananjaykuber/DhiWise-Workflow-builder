@@ -80,7 +80,7 @@ const useFilterData = () => {
 
       switch (condition) {
         case 'number equals':
-          return columnValue === inputNumber;
+          return columnValue == inputNumber;
         case 'number is greater than':
           return columnValue > inputNumber;
         case 'number is greater than or equals':
