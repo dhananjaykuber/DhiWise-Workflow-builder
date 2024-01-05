@@ -1,46 +1,127 @@
-# Getting Started with Create React App
+# Workflow Builder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a data processing workflow tool that allows users to manipulate datasets using various nodes.
 
-## Available Scripts
+# Features
 
-In the project directory, you can run:
+### Input Node:
 
-### `npm start`
+- Handles CSV files, outputting datasets in CSV format.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Filter Node:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Filters datasets based on given column and condition.
 
-### `npm test`
+#### For numeric column following operations can be performed:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- number equals
+- number is greater than
+- number is greater than or equals
+- number is less than
+- number is less than or equals
+- data is not empty or null
+- data matches regex
 
-### `npm run build`
+#### For string column following operations can be performed:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- text is exactly
+- text is not exactly
+- text includes
+- text does not includes
+- data is not empty or null
+- data matches regex
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Sort Node:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Sorts datasets based on a specified column. (asc, desc)
 
-### `npm run eject`
+### Slice Node:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Slices datasets based on indices.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Find Node:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Finds the first occurrence of a value in a given column of a dataset.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Map Node:
 
-## Learn More
+- Maps and transforms dataset values based on specified conditions.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### For numeric column following operations can be performed:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- addition
+- subtraction
+- multiplication
+- division
+- round up
+- round down
+- round numbers to the nearest integer
+
+#### For string column following operations can be performed:
+
+- change to uppercase
+- change to lowercase
+- concatinate the string
+- trim
+
+### Save workflow:
+
+- save created workflow so you are able do edit your previous workflows
+
+### Export dataset:
+
+- export the output in csv or json format
+
+# Getting Started
+
+#### Prerequisites
+
+- Node.js and npm installed on your machine
+
+#### Installation & Usage
+
+- Clone this repository: git clone https://github.com/dhananjaykuber/DhiWise-Workflow-builder
+- Navigate to the project directory: `cd DhiWise-Workflow-builder`
+- Install dependencies: `npm install`
+- Run the application: `npm start` OR `npm run start`
+- Access the application in your browser at http://localhost:3000
+
+# Deployment
+
+- https://dhi-wise-workflow-builder.vercel.app/
+
+# Screenshots
+
+#### Home
+
+![App Screenshot](https://res.cloudinary.com/dhananjaykuber-cloud/image/upload/v1704488344/workflow-builder/1_cxezpu.png)
+
+#### Workflow Dashboard (click on add button to add any block or node)
+
+![App Screenshot](https://res.cloudinary.com/dhananjaykuber-cloud/image/upload/v1704488344/workflow-builder/2_pk7dmb.png)
+
+#### Choose file from file dropdown
+
+![App Screenshot](https://res.cloudinary.com/dhananjaykuber-cloud/image/upload/v1704488345/workflow-builder/3_nq8v2g.png)
+
+#### Add any node you want and connect with file node
+
+![App Screenshot](https://res.cloudinary.com/dhananjaykuber-cloud/image/upload/v1704488345/workflow-builder/4_q8ei3h.png)
+
+#### Select condition and columns (node wise)
+
+![App Screenshot](https://res.cloudinary.com/dhananjaykuber-cloud/image/upload/v1704488344/workflow-builder/5_umvzd7.png)
+
+#### Redux slice for storing workflow
+
+![App Screenshot](https://res.cloudinary.com/dhananjaykuber-cloud/image/upload/v1704488344/workflow-builder/redux_fdvxuv.png)
+
+# Tech Stack
+
+- ReactJS + Typescript
+- reactflow - see documentation [here](https://reactflow.dev/learn/getting-started/installation-and-requirements)
+- Tailwind CSS
+
+#
+
+##### by [@Dhananjay Kuber](https://dhananjaykuber.vercel.app/)
