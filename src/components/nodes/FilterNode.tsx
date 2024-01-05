@@ -31,7 +31,8 @@ const FilterNode = () => {
   const { getLeftColumnsForSelectOptions } = useGetColumns();
 
   // custom filter data hook
-  const { filterBasedOnStringCondition } = useFilterData();
+  const { filterBasedOnNumberCondition, filterBasedOnStringCondition } =
+    useFilterData();
 
   const [columnNames, setColumnNames] = useState<SelectOption[]>([]);
   const [conditions, setConditions] = useState<SelectOption[]>([]);
@@ -96,6 +97,13 @@ const FilterNode = () => {
           );
           if (dataType?.type === 'number') {
             // call the number filter here
+            filterBasedOnNumberCondition(
+              nodeId,
+              data,
+              selectedColumn,
+              selectedCondition,
+              inputRef.current.value
+            );
           } else {
             // call the string string here
             filterBasedOnStringCondition(
@@ -135,7 +143,9 @@ const FilterNode = () => {
             onChange={handleConditionChange}
             className="nodrag"
           />
-          {selectedCondition && <InputBox className="nodrag" ref={inputRef} />}
+          {selectedCondition && (
+            <InputBox className="nodrag w-[242px]" ref={inputRef} />
+          )}
         </>
       )}
     </CustomNode>

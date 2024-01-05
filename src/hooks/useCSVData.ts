@@ -1,3 +1,5 @@
+import Papa from 'papaparse';
+
 const useCSVData = () => {
   const readCSVData = async (fileName: string) => {
     try {
@@ -8,18 +10,22 @@ const useCSVData = () => {
 
       const data = await response.text();
 
-      // parsing data in array of objects
-      const parsedData = data.split('\n').map((row) => row.split(','));
-      const headers = parsedData[0];
-      const objectsArray = parsedData.slice(1).map((row) => {
-        const rowData: any = {};
-        headers.forEach((header, index) => {
-          rowData[header] = row[index];
+      // my logic
+      const logicRes = new Promise((resolve, reject) => {
+        Papa.parse(data, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (result) => {
+            resolve(result.data);
+          },
+          error: (error: Error) => {
+            console.error(error);
+            reject(error);
+          },
         });
-        return rowData;
       });
 
-      return objectsArray;
+      return logicRes;
     } catch (error) {
       console.error(error);
       throw error;

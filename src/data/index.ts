@@ -1,7 +1,10 @@
 export const CSVData = [
-  // {
-  //   text: 'annual-enterprise-survey-2021.csv',
-  // },
+  {
+    text: 'annual-enterprise-survey-2021.csv',
+  },
+  {
+    text: 'bankloan.csv',
+  },
   {
     text: 'color_srgb.csv',
   },
@@ -20,7 +23,7 @@ export const Conditions = {
     { text: 'number is greater than' },
     { text: 'number is greater than or equals' },
     { text: 'number is less than' },
-    { text: 'number is less than or equals ' },
+    { text: 'number is less than or equals' },
     { text: 'data is not empty or null' },
     { text: 'data matches regex' },
   ],

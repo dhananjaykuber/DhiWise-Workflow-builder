@@ -9,26 +9,24 @@ const useGetColumns = () => {
 
   const { getLeftSourceNodeId } = useGetSource();
 
-  // get columns for table
+  // get columns for table along with the datatype of column
   const getColumns = (id: string) => {
-    let cols: { key: string; type: any }[] = [];
+    let cols: { key: string; type: string }[] = [];
 
     if (id && nodeOutputs[id]?.output?.length > 0) {
       const firstRow = nodeOutputs[id].output.at(0);
 
       if (firstRow) {
         Object.entries(firstRow).forEach(([key, value]) => {
-          {
-            const type =
-              typeof value === 'number' && !isNaN(value) ? 'number' : 'string';
-            cols.push({ key, type: type });
-          }
+          const type = isNaN(Number(value)) ? 'string' : 'number';
+          cols.push({ key, type });
         });
       }
     }
 
     return cols;
   };
+
   // get left connected blocks data columns for select options
   const getLeftColumnsForSelectOptions = (nodeId: string, edges: Edge[]) => {
     // get the left source of node
