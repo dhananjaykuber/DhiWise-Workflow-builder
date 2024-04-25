@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center gap-5 sm:w-[400px] sm:m-auto p-5">
       <h1 className="text-white text-xl font-medium tracking-wider mb-3">
-        Worlflow Builder
+        Dataflow Builder
       </h1>
       <CreateWorkflowForm />
 

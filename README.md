@@ -1,4 +1,4 @@
-# Workflow Builder
+# DataFlow Builder
 
 This project is a data processing workflow tool that allows users to manipulate datasets using various nodes.
 
@@ -124,4 +124,4 @@ This project is a data processing workflow tool that allows users to manipulate 
 
 #
 
-##### by [@Dhananjay Kuber](https://dhananjaykuber.vercel.app/)
+##### by [@Dhananjay Kuber](https://dhananjaykuber.me/)

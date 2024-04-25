@@ -39,7 +39,7 @@ const Header = () => {
         to="/"
         className="text-white uppercase font-medium text-sm tracking-wider p-1.5"
       >
-        Workflow Builder
+        DataFlow Builder
       </Link>
 
       {/* TODO: change this  */}
